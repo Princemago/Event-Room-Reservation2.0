@@ -79,13 +79,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$select_query = "SELECT r.*, v.venue_name, t.teacher_name, s.student_name, d.department_name 
+$select_query = "SELECT r.*, v.venue_name, t.lastname AS teacher_name, CONCAT(s.firstname, ' ', s.lastname) AS student_name, d.department_name 
                  FROM reservations r
                  LEFT JOIN venues v ON r.venue_id = v.venue_id
-                 LEFT JOIN tbempinfo t ON r.teacher_id = t.teacher_id
-                 LEFT JOIN tbstudinfo s ON r.student_id = s.student_id
+                 LEFT JOIN tbempinfo t ON r.empid = t.empid
+                 LEFT JOIN tbstudinfo s ON r.studid = s.studid
                  LEFT JOIN departments d ON r.department_id = d.department_id";
 $result = $conn->query($select_query);
+
+
+
 
 if (!$result) {
     die("Query failed: " . $conn->error);
