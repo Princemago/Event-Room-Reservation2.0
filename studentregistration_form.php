@@ -12,7 +12,8 @@
         }
 
         .container {
-            margin-top: 50px;
+            max-width: 400px;
+            margin: 50px auto;
         }
 
         .cardcontainer {
@@ -23,12 +24,10 @@
         }
 
         form {
-            max-width: 400px;
-            margin: auto;
+            margin-top: 20px;
         }
 
         label {
-            margin-bottom: 5px;
             font-weight: bold;
         }
 
@@ -54,32 +53,30 @@
 </head>
 <body>
     <div class="container">
-        <div class="main-content">
-            <div class="cardcontainer">
-                <h3 class="text-center">Add Student Information</h3>
-                <hr>
+        <div class="cardcontainer">
+            <h3 class="text-center">Add Student Information</h3>
+            <hr>
 
-                <form action="process_student_info.php" method="post">
-                    <div class="form-group">
-                        <label for="lastname">Last Name:</label>
-                        <input type="text" class="form-control" name="lastname" required>
-                    </div>
+            <form action="process_student_info.php" method="post">
+                <div class="form-group">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" class="form-control" name="lastname" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="firstname">First Name:</label>
-                        <input type="text" class="form-control" name="firstname" required>
-                    </div>
+                <div class="form-group">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" class="form-control" name="firstname" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="course">Course:</label>
-                        <input type="text" class="form-control" name="course" required>
-                    </div>
+                <div class="form-group">
+                    <label for="course">Course:</label>
+                    <input type="text" class="form-control" name="course" required>
+                </div>
 
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                    </div>
-                </form>
-            </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </form>
         </div>
     </div>
 

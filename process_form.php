@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "finaldb3";
+$dbname = "db_nt3101";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -20,32 +20,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $role_id = $_POST["role_id"];
 
-    // Insert data into tbemp_acc table
-    $sql = "INSERT INTO tbemp_acc (empid, department_id, email, password, role_id) VALUES ('$empid', '$department_id', '$email', '$password', '$role_id')";
+    // Check if empid exists in tbempinfo
+    $checkEmpidSql = "SELECT empid FROM tbempinfo WHERE empid = '$empid'";
+    $result = $conn->query($checkEmpidSql);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-
-        // Fetch the inserted data from tbemp_acc
-        $fetchSql = "SELECT * FROM tbemp_acc WHERE empid = '$empid'";
-        $result = $conn->query($fetchSql);
-
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while ($row = $result->fetch_assoc()) {
-                echo "<br>Inserted Data:<br>";
-                echo "empaccountId: " . $row["empaccountId"] . "<br>";
-                echo "empid: " . $row["empid"] . "<br>";
-                echo "department_id: " . $row["department_id"] . "<br>";
-                echo "email: " . $row["email"] . "<br>";
-                echo "password: " . $row["password"] . "<br>";
-                echo "role_id: " . $row["role_id"] . "<br>";
-            }
-        } else {
-            echo "No data found";
+    if ($result->num_rows == 0) {
+        // If empid doesn't exist, insert into tbempinfo
+        $insertEmpInfoSql = "INSERT INTO tbempinfo (empid) VALUES ('$empid')";
+        if ($conn->query($insertEmpInfoSql) !== TRUE) {
+            echo "Error inserting into tbempinfo: " . $conn->error;
+            $conn->close();
+            exit;
         }
+    }
+
+    // Insert data into tbemp_acc table
+    $insertEmpAccSql = "INSERT INTO tbemp_acc (empid, department_id, email, password, role_id) VALUES ('$empid', '$department_id', '$email', '$password', '$role_id')";
+
+    if ($conn->query($insertEmpAccSql) === TRUE) {
+        // Display alert and redirect
+        echo "<script>alert('New record created successfully'); window.location.href='employee_login.php';</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        if (strpos($conn->error, 'FOREIGN KEY') !== false) {
+            echo "<script>alert('Error: Foreign key constraint failure. The empid may not exist in tbempinfo.')</script>";
+        } else {
+            echo "<script>alert('Error: " . $insertEmpAccSql . "\\n" . $conn->error . "')</script>";
+        }
     }
 }
 

@@ -12,7 +12,6 @@
 
 <div class="container mt-5">
     <h2 class="mb-4">Student Account Form</h2>
-    <form action="trackLogin.php" method="post">
     <form action="process_student_form.php" method="post">
         <div class="form-group">
             <label for="studid">Student ID:</label>
@@ -41,7 +40,6 @@
 
         <button type="submit" class="btn btn-primary" >Submit</button>
     </form>
-</form>
 </div>
 
 <!-- Bootstrap JS and Popper.js -->

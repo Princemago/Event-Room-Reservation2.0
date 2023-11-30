@@ -39,7 +39,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "finaldb3";
+        $dbname = "db_nt3101";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
