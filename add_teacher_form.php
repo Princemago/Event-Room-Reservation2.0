@@ -7,13 +7,44 @@
 
   <!-- Add Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 50px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Employee Account Information</h2>
+<div class="container">
+  <h2>Employee Account Information</h2>
 
-  <form action="process_form.php" method="post">
+  <form action="employee_form.php" method="post">
     <div class="form-group">
       <label for="empid">Employee ID:</label>
       <input type="text" class="form-control" name="empid" required>
